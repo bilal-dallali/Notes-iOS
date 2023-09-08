@@ -11,6 +11,7 @@
 		9C0737F32A9BDC4D007D2952 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0737F22A9BDC4D007D2952 /* HomeView.swift */; };
 		9C0737F52A9BDC4F007D2952 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C0737F42A9BDC4F007D2952 /* Assets.xcassets */; };
 		9C0737F92A9BDC4F007D2952 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C0737F82A9BDC4F007D2952 /* Preview Assets.xcassets */; };
+		9C37FEE92AAB5A7700B5D6AA /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C37FEE82AAB5A7700B5D6AA /* AddNoteView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,8 @@
 		9C0737F42A9BDC4F007D2952 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9C0737F62A9BDC4F007D2952 /* Notes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Notes.entitlements; sourceTree = "<group>"; };
 		9C0737F82A9BDC4F007D2952 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		9C37FEE82AAB5A7700B5D6AA /* AddNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteView.swift; sourceTree = "<group>"; };
+		9CD42DB12AAB1DC7001C2BAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,11 +55,13 @@
 		9C0737EF2A9BDC4D007D2952 /* Notes */ = {
 			isa = PBXGroup;
 			children = (
+				9CD42DB12AAB1DC7001C2BAD /* Info.plist */,
 				9C0737F02A9BDC4D007D2952 /* NotesApp.swift */,
 				9C0737F22A9BDC4D007D2952 /* HomeView.swift */,
 				9C0737F42A9BDC4F007D2952 /* Assets.xcassets */,
 				9C0737F62A9BDC4F007D2952 /* Notes.entitlements */,
 				9C0737F72A9BDC4F007D2952 /* Preview Content */,
+				9C37FEE82AAB5A7700B5D6AA /* AddNoteView.swift */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
@@ -139,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C37FEE92AAB5A7700B5D6AA /* AddNoteView.swift in Sources */,
 				9C0737F32A9BDC4D007D2952 /* HomeView.swift in Sources */,
 				9C0737F12A9BDC4D007D2952 /* NotesApp.swift in Sources */,
 			);
@@ -269,6 +275,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Notes/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -307,6 +314,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Notes/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
