@@ -16,7 +16,8 @@ struct HomeView: View {
     @State var showAlert = false
     
     @State var deleteItem: Note?
-    
+    @State var updateNote = ""
+    @State var updateNoteId = ""
     @State var isEditMode: EditMode = .inactive
     
     var alert: Alert {
@@ -26,18 +27,37 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             List(self.notes) { note in
-                Text(note.note)
-                    .padding()
-                    .onLongPressGesture {
-                        self.showAlert.toggle()
-                        deleteItem = note
+                if (self.isEditMode == .inactive) {
+                    Text(note.note)
+                        .padding()
+                        .onLongPressGesture {
+                            self.showAlert.toggle()
+                            deleteItem = note
+                        }
+                } else {
+                    HStack {
+                        Image(systemName: "pencil.circle.fill")
+                            .foregroundColor(.yellow)
+                        Text(note.note)
+                            .padding()
                     }
+                    .onTapGesture {
+                        self.updateNote = note.note
+                        self.updateNoteId = note.id
+                        self.showAdd.toggle()
+                    }
+                }
+                
             }
             .alert(isPresented: $showAlert, content: {
                 alert
             })
             .sheet(isPresented: $showAdd, onDismiss: fetchNotes, content: {
-                AddNoteView()
+                if (self.isEditMode == .inactive) {
+                    AddNoteView()
+                } else {
+                    UpdateNoteView(text: $updateNote, noteId: $updateNoteId)
+                }
             })
             .onAppear(perform: {
                 fetchNotes()
@@ -80,6 +100,10 @@ struct HomeView: View {
         }
         
         task.resume()
+        
+        if (self.isEditMode == .active) {
+            self.isEditMode = .inactive
+        }
     }
     
     func deleteNote() {
