@@ -13,20 +13,49 @@ struct HomeView: View {
     
     @State var showAdd = false
     
+    @State var showAlert = false
+    
+    @State var deleteItem: Note?
+    
+    @State var isEditMode: EditMode = .inactive
+    
+    var alert: Alert {
+        Alert(title: Text("Delete"), message: Text("Are you sure you want to delete?"), primaryButton: .destructive(Text("Delete"), action: deleteNote), secondaryButton: .cancel())
+    }
+    
     var body: some View {
         NavigationView {
             List(self.notes) { note in
                 Text(note.note)
                     .padding()
+                    .onLongPressGesture {
+                        self.showAlert.toggle()
+                        deleteItem = note
+                    }
             }
-            .sheet(isPresented: $showAdd, content: {
+            .alert(isPresented: $showAlert, content: {
+                alert
+            })
+            .sheet(isPresented: $showAdd, onDismiss: fetchNotes, content: {
                 AddNoteView()
             })
             .onAppear(perform: {
                 fetchNotes()
             })
             .navigationTitle("Notes")
-            .navigationBarItems(trailing: Button(action: {
+            .navigationBarItems(leading: Button(action: {
+                if (self.isEditMode == .inactive) {
+                    self.isEditMode = .active
+                } else {
+                    self.isEditMode = .inactive
+                }
+            }, label: {
+                if (self.isEditMode == .inactive) {
+                    Text("Edit")
+                } else {
+                    Text("Done")
+                }
+            }),trailing: Button(action: {
                 self.showAdd.toggle()
             }, label: {
                 Text("Add")
@@ -35,6 +64,7 @@ struct HomeView: View {
     }
     
     func fetchNotes() {
+        
         let url = URL(string: "http://localhost:3000/notes")!
         
         let task = URLSession.shared.dataTask(with: url) { data, res, err in
@@ -42,7 +72,7 @@ struct HomeView: View {
             
             do {
                 let notes = try JSONDecoder().decode([Note].self, from: data)
-                print(notes)
+                //print(notes)
                 self.notes = notes
             } catch {
                 print(error)
@@ -50,6 +80,35 @@ struct HomeView: View {
         }
         
         task.resume()
+    }
+    
+    func deleteNote() {
+        //print("delete note")
+        guard let id = deleteItem?._id else { return }
+        
+        let url = URL(string: "http://localhost:3000/notes/\(id)")!
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "DELETE"
+        
+        let task = URLSession.shared.dataTask(with: request) { data, res, err in
+            guard err == nil else { return }
+            
+            guard let data = data else { return }
+            
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+                    print(json)
+                }
+            } catch let error {
+                print(error)
+            }
+        }
+        
+        task.resume()
+        
+        fetchNotes()
     }
 }
 

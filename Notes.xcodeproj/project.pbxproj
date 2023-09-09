@@ -58,10 +58,10 @@
 				9CD42DB12AAB1DC7001C2BAD /* Info.plist */,
 				9C0737F02A9BDC4D007D2952 /* NotesApp.swift */,
 				9C0737F22A9BDC4D007D2952 /* HomeView.swift */,
+				9C37FEE82AAB5A7700B5D6AA /* AddNoteView.swift */,
 				9C0737F42A9BDC4F007D2952 /* Assets.xcassets */,
 				9C0737F62A9BDC4F007D2952 /* Notes.entitlements */,
 				9C0737F72A9BDC4F007D2952 /* Preview Content */,
-				9C37FEE82AAB5A7700B5D6AA /* AddNoteView.swift */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
